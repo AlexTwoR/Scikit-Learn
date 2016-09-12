@@ -31,3 +31,19 @@ plt.plot(x, clf.predict(x), color='red')
 plt.show()
 
 
+
+#Support Vector Machine 
+
+from sklearn import svm, datasets
+
+digits=datasets.load_digits()
+print(digits.data)
+
+clf = svm.SVC()
+clf = svm.SVC(gamma=0.001, C=100)
+
+X,y = digits.data[:-10], digits.target[:-10]
+clf.fit(X,y)
+
+digits.target[-4]
+print(clf.predict(digits.data[-4]))
