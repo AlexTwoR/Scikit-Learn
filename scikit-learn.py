@@ -96,5 +96,16 @@ print(X_norm)
 print(X_stan)
 
 
-#
+#Logistic Regression
 
+from sklearn.linear_model import LogisticRegression
+from sklearn import metrics
+
+lreg=LogisticRegression()
+lreg.fit(X,y)
+
+exp=y
+pred=lreg.predict(X)
+
+print(metrics.classification_report(exp, pred))
+print(metrics.confusion_matrix(exp, pred))
