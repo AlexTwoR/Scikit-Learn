@@ -6,7 +6,7 @@ from matplotlib.colors import ListedColormap
 import matplotlib.pyplot as plt
 import warnings
 
-
+#---- Visualization ----
 def versiontuple(v):
     return tuple(map(int, (v.split("."))))
 
@@ -52,16 +52,19 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
                     s=55, label='test set')
 
 
+
+
 # ---- LogisticRegression ---- 
 
+#Load Data
 iris = datasets.load_iris()
 X = iris.data[:, [2, 3]]
 y = iris.target
 
 print('Class labels:', np.unique(y))
 
+#Split data
 from sklearn.cross_validation import train_test_split
-
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.3, random_state=0)
 
 from sklearn.linear_model import LogisticRegression
@@ -72,10 +75,31 @@ sc.fit(X_train)
 X_train_std = sc.transform(X_train)
 X_test_std = sc.transform(X_test)
 
-lr = LogisticRegression(C=100.0, random_state=0)
+#Fit model
+lr = LogisticRegression(C=1000, random_state=0)
 lr.fit(X_train_std, y_train)
 
+lr.predict(X_test_std)
+np.mean(y_test==lr.predict(X_test_std))
 
+
+#simp cross val
+from sklearn import cross_validation
+cross_validation.cross_val_score(lr,X,y,cv=5)
+
+
+#KFold cross val
+from sklearn.cross_validation import KFold
+kf = KFold(len(X), n_folds=10)
+
+means = [] #values of cross score
+for train, test in kf:
+    #print("%s %s" % (train, test))
+    lr.fit(X[train], y[train])
+    means.append(np.mean(lr.predict(X[test])==y[test]))
+    
+print(np.mean(means))   
+  
 
 # ---- Plot -----
 X_combined_std = np.vstack((X_train_std, X_test_std))
@@ -89,3 +113,4 @@ plt.legend(loc='upper left')
 plt.tight_layout()
 # plt.savefig('./figures/logistic_regression.png', dpi=300)
 plt.show()
+#-------------

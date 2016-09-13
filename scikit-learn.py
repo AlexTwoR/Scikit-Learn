@@ -11,7 +11,7 @@ from sklearn.linear_model import Ridge
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import make_pipeline
 
-#Leinear
+#---- Leinear ----
 x = np.arange(20)
 x=x.reshape(len(x),1)
 x.shape
@@ -31,11 +31,15 @@ clf.fit(x,y)
 clf.coef_
 clf.intercept_
 
+from sklearn.metrics import r2_score
+r2_score(clf.predict(x),y)
+
 plt.scatter(x,y)
 plt.plot(x, clf.predict(x), color='red')
 plt.show()
 
-#Poly
+
+#---- Poly ----
 pmodel= make_pipeline(PolynomialFeatures(3), Ridge())
 pmodel.fit(x,y)
 
@@ -60,8 +64,6 @@ clf.fit(X,y)
 
 digits.target[-4]
 print(clf.predict(digits.data[-4]))
-
-
 
 
 #From Habr
