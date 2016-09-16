@@ -80,3 +80,24 @@ iris_frame['target'] = iris.target
 
 print(iris_frame)
 
+
+
+#---- seaborn ----
+#https://stanford.edu/~mwaskom/software/seaborn/index.html
+import numpy as mp
+import seaborn as sns
+
+sns.pairplot(iris_frame, hue = 'target')
+sns.corr(iris_frame)
+
+sns.heatmap(iris_frame.corr())
+
+iris_frame.corr()
+
+
+
+X1, Y1 = datasets.make_classification(n_features=5, n_redundant=2, 
+                                    n_informative=1, n_clusters_per_class=1)
+
+cox = DataFrame(X1)
+sns.heatmap(cox.corr())
