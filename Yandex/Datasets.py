@@ -26,7 +26,7 @@ plt.scatter(map(lambda x: x[0], circles[0]), map(lambda x: x[1], circles[0]),
 #---- datasets.make_classification -----
 
 #n_redundant - corr features
-X1, Y1 = datasets.make_classification(n_features=3, n_redundant=1, n_informative=1, n_clusters_per_class=1)
+X1, Y1 = datasets.make_classification(n_features=4, n_redundant=1, n_informative=1, n_clusters_per_class=1)
 
 plt.scatter(X1[:, 0], X1[:, 1], marker='o', c=Y1)
 
@@ -58,7 +58,7 @@ pylab.scatter(data[:,1], target, color = 'b')
 
 
 
-#---- datasets.make_regression ----
+#---- datasets.load_iris ----
 iris = datasets.load_iris()
 
 iris.keys()
@@ -94,7 +94,7 @@ sns.heatmap(iris_frame.corr())
 
 iris_frame.corr()
 
-
+# Cool tool!
 
 X1, Y1 = datasets.make_classification(n_features=5, n_redundant=2, 
                                     n_informative=1, n_clusters_per_class=1)
